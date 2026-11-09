@@ -8,6 +8,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: unzip -q ./*.zip
+      - name: Fix gradle file
+        run: |
+          sed -i 's/java\.util\.Properties()/Properties()/' AzdawajiApp/app/build.gradle.kts
+          sed -i '1i import java.util.Properties' AzdawajiApp/app/build.gradle.kts
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
